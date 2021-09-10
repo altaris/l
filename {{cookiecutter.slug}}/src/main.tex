@@ -1,0 +1,116 @@
+% -----------------------------------------------------------------------------
+% DOCUMENT CLASS
+% -----------------------------------------------------------------------------
+
+% See https://ftp.kddilabs.jp/CTAN/info/amscls-doc/Author_Handbook_Journals.pdf
+\documentclass[
+    % final,
+    reqno,
+]{amsart}
+
+% -----------------------------------------------------------------------------
+% PACKAGES
+% -----------------------------------------------------------------------------
+
+\usepackage[
+    eientei,
+    +maths,
+    +tikz,
+    scriptStyle = euler,
+]{kappak-amsart}
+
+\usepackage{MnSymbol}
+\usepackage{tikz-cd}
+\usepackage{todonotes}
+
+% -----------------------------------------------------------------------------
+% CONFIGURATION
+% -----------------------------------------------------------------------------
+
+\raggedbottom
+
+% -----------------------------------------------------------------------------
+% MACROS
+% -----------------------------------------------------------------------------
+
+\input{macros.tex}
+
+% -----------------------------------------------------------------------------
+% METADATA
+% -----------------------------------------------------------------------------
+
+\title{ {{ cookiecutter.title }} }
+\author[ {{ cookiecutter.short_name }} ]{ {{ cookiecutter.full_name }} }
+\date{ {% now 'local', '%Y' %} }
+
+{% if cookiecutter.address != "" -%}
+\address{ {{ cookiecutter.address }} }
+{% else -%}
+% \address{}
+{% endif -%}
+{% if cookiecutter.email != "" -%}
+\email{ {{ cookiecutter.email }} }
+{% else -%}
+% \email{}
+{% endif -%}
+{% if cookiecutter.website != "" -%}
+\urladdr{ {{ cookiecutter.website }} }
+{% else -%}
+% \urladdr{}
+{% endif %}
+
+% https://mathscinet.ams.org/mathscinet/msc/msc2020.html
+\subjclass[2020]{Primary 0000; Secondary 0000}
+\keywords{Keyword, keyword, Proper noun keyword}
+
+% -----------------------------------------------------------------------------
+% DOCUMENT
+% -----------------------------------------------------------------------------
+
+\begin{document}
+
+% ------------------------------
+% ABSTRACT
+% ------------------------------
+
+\input{parts/abstract.tex}
+
+% ------------------------------
+% TOP MATTERS
+% ------------------------------
+
+\maketitle
+
+\tableofcontents
+
+% ------------------------------
+% FRONT MATTERS
+% ------------------------------
+
+
+
+% ------------------------------
+% DOCUMENT CONTENT
+% ------------------------------
+
+\input{parts/introduction.tex}
+
+
+
+\input{parts/conclusion.tex}
+
+% ------------------------------
+% BACK MATTERS
+% ------------------------------
+
+% \nocite{*}
+\bibliographystyle{alpha}
+\bibliography{bibliography}
+
+% ------------------------------
+% APPENDICES
+% ------------------------------
+
+
+
+\end{document}

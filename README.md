@@ -1,2 +1,9 @@
-# l
- My cookiecutter LaTeX template 
+My cookiecutter LaTeX template.
+
+# How to use
+
+ezpz
+
+```sh
+cookiecutter gh:altaris/l
+```

@@ -1,0 +1,16 @@
+% This file should only be included by the tikz files in this directory.
+
+\include{tikz.tex}
+
+% args: x, y, w, h, label, inner x, innner y
+\newenvironment{TIKZZONE}[7]{
+    \begin{scope} [shift = {(#1, #2)}]
+        \draw [style=help lines, gray!70, dotted] (0, 0) grid (#3, #4);
+        \fill [gray!20] (#6, #7) circle (1.5pt);
+        \draw [dotted, thick] (0, 0) node [above right]
+            {\small{\texttt{#5}}} -- (0, #4) -- (#3, #4) -- (#3, 0) -- cycle;
+        \begin{scope} [shift = {(#6, #7)}]
+}{
+        \end{scope}
+    \end{scope}
+}

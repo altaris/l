@@ -1,0 +1,25 @@
+\documentclass[crop, tikz]{standalone}
+
+\input{private.tex}
+
+\begin{document}
+
+\begin{tikzpicture}
+
+%<*main>
+% Code here will always be included in \tikzinput
+%</main>
+
+% Import using e.g.
+% \tikzinput[.8]{example.tex}{tag}
+\begin{TIKZZONE}{0}{0}{5}{5}{optional-label}{1}{2.5}
+%<*tag>
+    \path (0, 0) node (a) [ellipse, rotate=10, draw] {An ellipse}
+          (2, 1) node (b) [circle, draw]             {A circle};
+    \draw[thick] (node cs:name=a) -- (node cs:name=b);
+%</tag>
+\end{TIKZZONE}
+
+\end{tikzpicture}
+
+\end{document}

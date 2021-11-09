@@ -1,0 +1,21 @@
+% This file should be included by files outside of this directory
+
+% \usetikzlibrary{
+%     shapes.geometric
+% }
+
+% This command alows to import parts of tikz files. The ``main'' tag is
+% imported by default, and other tags can be specified in 3rd argument as a
+% comma separated list (with NO SPACES!). 2nd argument is file name, expected
+% to be in ``tikz/'' subdir. 1st argument in is optional, and is the tikz scale
+% factor
+\usepackage{catchfilebetweentags}
+\newcommand{\tikzinput}[3][1]{
+    \begin{tikzpicture}
+        \tikzset{scale = #1}
+        \ExecuteMetaData[tikz/#2]{main}
+        \@for\tmp:=#3\do{
+            \ExecuteMetaData[tikz/#2]{\tmp}
+        }
+    \end{tikzpicture}
+}

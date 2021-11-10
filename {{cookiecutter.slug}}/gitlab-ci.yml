@@ -1,0 +1,33 @@
+# Full reference https://docs.gitlab.com/ee/ci/yaml/index.html
+
+variables:
+  TEX_MAIN: src/main.tex
+  OUTPUT_PDF: {{ cookiecutter.slug }}.pdf
+  WEBDAV_DIR: share/releases
+
+stages:
+  - build
+  - deploy
+
+build-pdfs:
+  artifacts:
+    paths:
+      - $OUTPUT_PDF
+  before_script:
+    - git submodule update --init --recursive --remote
+  image: aergus/latex
+  script:
+    - latexmk -xelatex $TEX_MAIN
+  stage: build
+
+upload-cv:
+  image: altaris/webdav-upload
+  script: upload
+  stage: deploy
+  variables:
+    FILE: $OUTPUT_PDF
+    # PASSWORD: SET IN CI/CD SETTINGS
+    # SERVER: SET IN CI/CD SETTINGS
+    # USER: SET IN CI/CD SETTINGS
+    VERBOSE: "yes"
+    WEBDAV_PATH: $WEBDAV_DIR/$OUTPUT_PDF

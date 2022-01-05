@@ -6,5 +6,6 @@
     "address": "National Institute for Informatics, Tokyo, Japan",
     "email": "",
     "website": "hothanh.fr/cedric",
+    "github_username": "altaris",
     "_copy_without_render": ["*.sty", "src/tikz"]
 }

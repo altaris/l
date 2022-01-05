@@ -1,0 +1,63 @@
+name: Build
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/**
+      - src/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Compile paper
+        # https://github.com/marketplace/actions/github-action-for-latex
+        uses: xu-cheng/latex-action@v2
+        with:
+          latexmk_use_xelatex: true
+          root_file: main.tex
+          working_directory: src
+      - name: Upload artifact
+        # https://github.com/marketplace/actions/upload-a-build-artifact
+        uses: actions/upload-artifact@v2
+        with:
+          if-no-files-found: error
+          name: main
+          path: src/main.pdf
+
+  publish:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+        with:
+          ref: pdf
+      - name: Download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: main
+      - name: Commit artifact
+        run: |
+          git config user.email "bot@users.noreply.github.com"
+          git config user.name "Github Actions Bot"
+          git add .
+          if ! (git diff --quiet && git diff --staged --quiet); then
+          {% raw -%}
+          git commit -m "Updated paper ${{ github.sha }}"
+          {%- endraw %}
+          fi
+      - name: Push to 'pdf' branch
+        # https://github.com/marketplace/actions/github-push
+        uses: ad-m/github-push-action@master
+        with:
+          branch: pdf
+          {% raw -%}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          {%- endraw %}
+
+# Latest pdf can be found at https://github.com/{{ cookiecutter.github_username }}/{{ cookiecutter.slug }}/blob/pdf/main.pdf

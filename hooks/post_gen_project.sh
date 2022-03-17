@@ -6,5 +6,5 @@ function _copy () {
 }
 
 KAPPAK_URL="https://raw.githubusercontent.com/altaris/kappak/master/out/texmf/tex/latex/kappak/"
-KAPPAK_FILE="kappak-beamer.sty"
+KAPPAK_FILE="kappak-amsart.sty"
 _copy "$KAPPAK_URL" "$KAPPAK_FILE"

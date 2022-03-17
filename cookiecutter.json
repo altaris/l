@@ -5,7 +5,7 @@
     "short_name": "C. Ho Thanh",
     "address": "National Institute for Informatics, Tokyo, Japan",
     "email": "",
-    "website": "hothanh.fr/cedric",
+    "website": "cedric.hothanh.fr",
     "github_username": "altaris",
     "_copy_without_render": ["*.sty", "src/tikz"]
 }
